@@ -60,6 +60,13 @@ template <typename data, typename key_value> data unordered_table<data, key_valu
 				delete iterator;
 				return result;
 			}
+			else if((iterator->next == last) && (last->key == key)) {
+				data result = last->value;
+				delete last;
+				last = iterator;
+				last->next = nullptr;
+				return result;
+			}
 			else if ((iterator->next != nullptr) && (iterator->next->key == key)) {
 				result = iterator->next->value;
 				node* remember_node = iterator->next->next;
